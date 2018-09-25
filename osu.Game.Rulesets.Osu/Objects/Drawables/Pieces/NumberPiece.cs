@@ -41,7 +41,7 @@ namespace osu.Game.Rulesets.Osu.Objects.Drawables.Pieces
                     },
                     Child = new Box()
                 }, s => s.GetTexture("Play/osu/hitcircle") == null),
-                number = new OsuSpriteText
+                number = new OsuSpriteTextTest
                 {
                     Text = @"1",
                     Font = @"Venera",
