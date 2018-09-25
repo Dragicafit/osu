@@ -9,24 +9,26 @@ using osu.Game.Graphics.Sprites;
 using OpenTK.Graphics;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Skinning;
+using osu.Framework.IO.Stores;
+using osu.Framework.Allocation;
 
 namespace osu.Game.Rulesets.Osu.Objects.Drawables.Pieces
 {
     public class NumberPiece : Container
     {
-        private readonly SpriteText number;
+        public SpriteText number;
 
-        public string Text
-        {
-            get { return number.Text; }
-            set { number.Text = value; }
-        }
+        public string Text = @"1";
 
         public NumberPiece()
         {
             Anchor = Anchor.Centre;
             Origin = Anchor.Centre;
+        }
 
+        [BackgroundDependencyLoader]
+        private void load(FontStore store, ISkinSource skin)
+        {
             Children = new Drawable[]
             {
                 new SkinnableDrawable("Play/osu/number-glow", name => new CircularContainer
@@ -41,15 +43,15 @@ namespace osu.Game.Rulesets.Osu.Objects.Drawables.Pieces
                     },
                     Child = new Box()
                 }, s => s.GetTexture("Play/osu/hitcircle") == null),
-                number = new OsuSpriteText
+                number = new OsuSpriteTextSkinnable(Text, @"Venera")
                 {
-                    Text = @"1",
-                    Font = @"Venera",
                     UseFullGlyphHeight = false,
                     Anchor = Anchor.Centre,
                     Origin = Anchor.Centre,
                     TextSize = 40,
-                    Alpha = 1
+                    Alpha = 1,
+                    store = store,
+                    skin = skin
                 }
             };
         }
