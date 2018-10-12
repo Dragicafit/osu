@@ -103,66 +103,69 @@ namespace osu.Game.Rulesets.Osu.UI.Cursor
             [BackgroundDependencyLoader]
             private void load(OsuConfigManager config, IBindableBeatmap beatmap)
             {
-                Child = cursorContainer = new SkinnableDrawable("cursor", _ => new CircularContainer
-                {
-                    RelativeSizeAxes = Axes.Both,
-                    Masking = true,
-                    BorderThickness = Size.X / 6,
-                    BorderColour = Color4.White,
-                    EdgeEffect = new EdgeEffectParameters
+                Children = new Drawable[] {
+                    cursorContainer = new SkinnableDrawable("cursor", _ => new CircularContainer
                     {
-                        Type = EdgeEffectType.Shadow,
-                        Colour = Color4.Pink.Opacity(0.5f),
-                        Radius = 5,
+                        RelativeSizeAxes = Axes.Both,
+                        Masking = true,
+                        BorderThickness = Size.X / 6,
+                        BorderColour = Color4.White,
+                        EdgeEffect = new EdgeEffectParameters
+                        {
+                            Type = EdgeEffectType.Shadow,
+                            Colour = Color4.Pink.Opacity(0.5f),
+                            Radius = 5,
+                        },
+                        Children = new Drawable[]
+                        {
+                            new Box
+                            {
+                                RelativeSizeAxes = Axes.Both,
+                                Alpha = 0,
+                                AlwaysPresent = true,
+                            },
+                            new CircularContainer
+                            {
+                                Origin = Anchor.Centre,
+                                Anchor = Anchor.Centre,
+                                RelativeSizeAxes = Axes.Both,
+                                Masking = true,
+                                BorderThickness = Size.X / 3,
+                                BorderColour = Color4.White.Opacity(0.5f),
+                                Children = new Drawable[]
+                                {
+                                    new Box
+                                    {
+                                        RelativeSizeAxes = Axes.Both,
+                                        Alpha = 0,
+                                        AlwaysPresent = true,
+                                    },
+                                },
+                            },
+                            new CircularContainer
+                            {
+                                Origin = Anchor.Centre,
+                                Anchor = Anchor.Centre,
+                                RelativeSizeAxes = Axes.Both,
+                                Scale = new Vector2(0.1f),
+                                Masking = true,
+                                Children = new Drawable[]
+                                {
+                                    new Box
+                                    {
+                                        RelativeSizeAxes = Axes.Both,
+                                        Colour = Color4.White,
+                                    },
+                                },
+                            },
+                        }
+                    }, restrictSize: false)
+                    {
+                        Origin = Anchor.Centre,
+                        Anchor = Anchor.Centre,
+                        RelativeSizeAxes = Axes.Both,
                     },
-                    Children = new Drawable[]
-                    {
-                        new Box
-                        {
-                            RelativeSizeAxes = Axes.Both,
-                            Alpha = 0,
-                            AlwaysPresent = true,
-                        },
-                        new CircularContainer
-                        {
-                            Origin = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            RelativeSizeAxes = Axes.Both,
-                            Masking = true,
-                            BorderThickness = Size.X / 3,
-                            BorderColour = Color4.White.Opacity(0.5f),
-                            Children = new Drawable[]
-                            {
-                                new Box
-                                {
-                                    RelativeSizeAxes = Axes.Both,
-                                    Alpha = 0,
-                                    AlwaysPresent = true,
-                                },
-                            },
-                        },
-                        new CircularContainer
-                        {
-                            Origin = Anchor.Centre,
-                            Anchor = Anchor.Centre,
-                            RelativeSizeAxes = Axes.Both,
-                            Scale = new Vector2(0.1f),
-                            Masking = true,
-                            Children = new Drawable[]
-                            {
-                                new Box
-                                {
-                                    RelativeSizeAxes = Axes.Both,
-                                    Colour = Color4.White,
-                                },
-                            },
-                        },
-                    }
-                }, restrictSize: false)
-                {
-                    Origin = Anchor.Centre,
-                    Anchor = Anchor.Centre,
-                    RelativeSizeAxes = Axes.Both,
+                    new SkinnableDrawable("cursormiddle", _ => null, restrictSize: false)
                 };
 
                 this.beatmap.BindTo(beatmap);

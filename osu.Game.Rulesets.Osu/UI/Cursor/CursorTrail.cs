@@ -17,6 +17,7 @@ using osu.Framework.Timing;
 using OpenTK;
 using OpenTK.Graphics;
 using OpenTK.Graphics.ES30;
+using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Osu.UI.Cursor
 {
@@ -79,10 +80,10 @@ namespace osu.Game.Rulesets.Osu.UI.Cursor
         public override bool ReceivePositionalInputAt(Vector2 screenSpacePos) => true;
 
         [BackgroundDependencyLoader]
-        private void load(ShaderManager shaders, TextureStore textures)
+        private void load(ShaderManager shaders, TextureStore textures, ISkinSource skin)
         {
             shader = shaders?.Load(@"CursorTrail", FragmentShaderDescriptor.TEXTURE);
-            texture = textures.Get(@"Cursor/cursortrail");
+            texture = skin.GetTexture(@"Cursor/cursortrail") ?? textures.Get(@"Cursor/cursortrail");
             Scale = new Vector2(1 / texture.ScaleAdjust);
         }
 
