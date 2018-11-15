@@ -7,23 +7,25 @@ using System.Linq;
 using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Skinning;
 
 namespace osu.Game.Rulesets.Osu.Objects.Drawables.Pieces
 {
     public class SpinnerSpmCounter : Container
     {
-        private readonly OsuSpriteText spmText;
+        private readonly SkinnableSpriteText spmText;
 
         public SpinnerSpmCounter()
         {
             Children = new Drawable[]
             {
-                spmText = new OsuSpriteText
+                spmText = new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
                 {
-                    Anchor = Anchor.TopCentre,
-                    Origin = Anchor.TopCentre,
+                    UseFullGlyphHeight = false,
+                    Font = @"Venera"
+                }, restrictSize: false)
+                {
                     Text = @"0",
-                    Font = @"Venera",
                     TextSize = 24
                 },
                 new OsuSpriteText
