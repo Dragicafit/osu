@@ -24,6 +24,7 @@ using osu.Game.Users;
 using osu.Framework.Graphics.Shapes;
 using osu.Framework.Extensions;
 using osu.Framework.Localisation;
+using osu.Game.Skinning;
 
 namespace osu.Game.Screens.Ranking
 {
@@ -210,9 +211,11 @@ namespace osu.Game.Screens.Ranking
             {
                 Children = new Drawable[]
                 {
-                    new OsuSpriteText {
-                        Text = statistic.Value.ToString().PadLeft(4, '0'),
+                    new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText {
                         Colour = colours.Gray7,
+                    }, restrictSize: false)
+                    {
+                        Text = statistic.Value.ToString().PadLeft(4, '0'),
                         TextSize = 30,
                         Anchor = Anchor.TopCentre,
                         Origin = Anchor.TopCentre,

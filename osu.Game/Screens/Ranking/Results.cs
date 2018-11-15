@@ -18,6 +18,7 @@ using osu.Game.Graphics;
 using osu.Game.Graphics.UserInterface;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Skinning;
 
 namespace osu.Game.Screens.Ranking
 {
@@ -186,14 +187,16 @@ namespace osu.Game.Screens.Ranking
                                     Height = 50,
                                     Margin = new MarginPadding { Bottom = 110 },
                                 },
-                                new OsuSpriteText
+                                new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                                {
+                                    Font = @"Exo2.0-Bold",
+                                    Colour = colours.BlueDarker,
+                                }, restrictSize: false)
                                 {
                                     Text = $"{score.MaxCombo}x",
                                     TextSize = 40,
                                     RelativePositionAxes = Axes.X,
-                                    Font = @"Exo2.0-Bold",
                                     X = 0.1f,
-                                    Colour = colours.BlueDarker,
                                     Anchor = Anchor.CentreLeft,
                                     Origin = Anchor.BottomCentre,
                                 },
@@ -207,14 +210,16 @@ namespace osu.Game.Screens.Ranking
                                     Anchor = Anchor.CentreLeft,
                                     Origin = Anchor.TopCentre,
                                 },
-                                new OsuSpriteText
+                                new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                                {
+                                    Font = @"Exo2.0-Bold",
+                                    Colour = colours.BlueDarker,
+                                }, restrictSize: false)
                                 {
                                     Text = $"{score.Accuracy:P2}",
                                     TextSize = 40,
                                     RelativePositionAxes = Axes.X,
-                                    Font = @"Exo2.0-Bold",
                                     X = 0.9f,
-                                    Colour = colours.BlueDarker,
                                     Anchor = Anchor.CentreLeft,
                                     Origin = Anchor.BottomCentre,
                                 },

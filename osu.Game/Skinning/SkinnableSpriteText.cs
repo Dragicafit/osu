@@ -8,9 +8,12 @@ namespace osu.Game.Skinning
 {
     public class SkinnableSpriteText : SkinnableDrawable<SpriteText>, IHasText
     {
+        public const float FONT_SIZE = 16;
+
         public SkinnableSpriteText(string name, Func<string, SpriteText> defaultImplementation, Func<ISkinSource, bool> allowFallback = null, bool restrictSize = true)
             : base(name, defaultImplementation, allowFallback, restrictSize)
         {
+            TextSize = FONT_SIZE;
         }
 
         protected override void SkinChanged(ISkinSource skin, bool allowFallback)

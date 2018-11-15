@@ -4,6 +4,7 @@
 using System;
 using osu.Framework.Graphics;
 using OpenTK;
+using osu.Framework.Graphics.Sprites;
 
 namespace osu.Game.Skinning
 {
@@ -22,6 +23,9 @@ namespace osu.Game.Skinning
         /// The displayed component. May or may not be a type-<typeparamref name="T"/> member.
         /// </summary>
         protected Drawable Drawable { get; private set; }
+
+        public Anchor Origin { get; set; } = Anchor.Centre;
+        public Anchor Anchor { get; set; } = Anchor.Centre;
 
         private readonly Func<string, T> createDefault;
 
@@ -65,8 +69,8 @@ namespace osu.Game.Skinning
 
             if (Drawable != null)
             {
-                Drawable.Origin = Anchor.Centre;
-                Drawable.Anchor = Anchor.Centre;
+                Drawable.Origin = Origin;
+                Drawable.Anchor = Anchor;
 
                 InternalChild = Drawable;
             }
