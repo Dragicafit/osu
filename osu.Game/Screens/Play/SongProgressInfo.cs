@@ -7,15 +7,16 @@ using osu.Framework.Graphics.Containers;
 using osu.Framework.Timing;
 using osu.Game.Graphics;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Skinning;
 using System;
 
 namespace osu.Game.Screens.Play
 {
     public class SongProgressInfo : Container
     {
-        private OsuSpriteText timeCurrent;
-        private OsuSpriteText timeLeft;
-        private OsuSpriteText progress;
+        private SkinnableSpriteText timeCurrent;
+        private SkinnableSpriteText timeLeft;
+        private SkinnableSpriteText progress;
 
         private double startTime;
         private double endTime;
@@ -37,30 +38,36 @@ namespace osu.Game.Screens.Play
         {
             Children = new Drawable[]
             {
-                timeCurrent = new OsuSpriteText
+                timeCurrent = new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                {
+                    Colour = colours.BlueLighter,
+                    Font = @"Venera",
+                }, restrictSize: false)
                 {
                     Origin = Anchor.BottomLeft,
                     Anchor = Anchor.BottomLeft,
-                    Colour = colours.BlueLighter,
-                    Font = @"Venera",
                     Margin = new MarginPadding
                     {
                         Left = margin,
                     },
                 },
-                progress = new OsuSpriteText
+                progress = new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                {
+                    Colour = colours.BlueLighter,
+                    Font = @"Venera",
+                }, restrictSize: false)
                 {
                     Origin = Anchor.BottomCentre,
                     Anchor = Anchor.BottomCentre,
+                },
+                timeLeft = new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                {
                     Colour = colours.BlueLighter,
                     Font = @"Venera",
-                },
-                timeLeft = new OsuSpriteText
+                }, restrictSize: false)
                 {
                     Origin = Anchor.BottomRight,
                     Anchor = Anchor.BottomRight,
-                    Colour = colours.BlueLighter,
-                    Font = @"Venera",
                     Margin = new MarginPadding
                     {
                         Right = margin,
