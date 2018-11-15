@@ -59,6 +59,10 @@ namespace osu.Game.Skinning
                     break;
                 case "Play/osu/number-text":
                     return !hasFont(Configuration.HitCircleFont) ? null : new LegacySpriteText(Textures, Configuration.HitCircleFont) { Scale = new Vector2(0.96f) };
+                case "Play/osu/score-text":
+                    return !hasFont(Configuration.ScoreFont) ? null : new LegacySpriteText(Textures, Configuration.ScoreFont) { Scale = new Vector2(0.96f) };
+                case "Play/osu/combo-text":
+                    return !hasFont(Configuration.ComboFont) ? null : new LegacySpriteText(Textures, Configuration.ComboFont) { Scale = new Vector2(0.96f) };
             }
 
             var texture = GetTexture(componentName);
@@ -172,12 +176,12 @@ namespace osu.Game.Skinning
                 string textureName = $"{font}-{c}";
 
                 // Approximate value that brings character sizing roughly in-line with stable
-                float ratio = 36;
+                float ratio = 90;
 
                 var texture = textures.Get($"{textureName}@2x");
                 if (texture == null)
                 {
-                    ratio = 18;
+                    ratio = 45;
                     texture = textures.Get(textureName);
                 }
 

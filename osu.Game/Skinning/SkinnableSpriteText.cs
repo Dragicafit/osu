@@ -19,6 +19,9 @@ namespace osu.Game.Skinning
 
             if (Drawable is IHasText textDrawable)
                 textDrawable.Text = Text;
+
+            if (Drawable is SpriteText spriteTextDrawable)
+                spriteTextDrawable.TextSize = TextSize;
         }
 
         private string text;
@@ -34,6 +37,22 @@ namespace osu.Game.Skinning
 
                 if (Drawable is IHasText textDrawable)
                     textDrawable.Text = value;
+            }
+        }
+
+        private float textSize;
+
+        public float TextSize
+        {
+            get => textSize;
+            set
+            {
+                if (textSize == value)
+                    return;
+                textSize = value;
+
+                if (Drawable is SpriteText textDrawable)
+                    textDrawable.TextSize = TextSize;
             }
         }
     }

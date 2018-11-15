@@ -44,10 +44,10 @@ namespace osu.Game.Rulesets.Osu.Objects.Drawables.Pieces
                 {
                     Font = @"Venera",
                     UseFullGlyphHeight = false,
-                    TextSize = 40,
                 }, restrictSize: false)
                 {
-                    Text = @"1"
+                    Text = @"1",
+                    TextSize = 40
                 }
             };
         }

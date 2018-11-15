@@ -43,6 +43,12 @@ namespace osu.Game.Skinning
                         case "HitCirclePrefix":
                             skin.HitCircleFont = pair.Value;
                             break;
+                        case "ScorePrefix":
+                            skin.ScoreFont = pair.Value;
+                            break;
+                        case "ComboPrefix":
+                            skin.ComboFont = pair.Value;
+                            break;
                     }
 
                     break;
