@@ -9,6 +9,7 @@ using osu.Game.Graphics.Sprites;
 using System;
 using System.Collections.Generic;
 using OpenTK.Graphics;
+using osu.Game.Skinning;
 
 namespace osu.Game.Graphics.UserInterface
 {
@@ -21,6 +22,7 @@ namespace osu.Game.Graphics.UserInterface
         public Bindable<T> Current = new Bindable<T>();
 
         protected SpriteText DisplayedCountSpriteText;
+        protected SkinnableSpriteText DisplayedCountSkinnableSpriteText;
 
         /// <summary>
         /// If true, the roll-up duration will be proportional to change in value.
@@ -55,7 +57,7 @@ namespace osu.Game.Graphics.UserInterface
                 if (EqualityComparer<T>.Default.Equals(displayedCount, value))
                     return;
                 displayedCount = value;
-                DisplayedCountSpriteText.Text = FormatCount(value);
+                DisplayedCountSkinnableSpriteText.Text = FormatCount(value);
             }
         }
 
@@ -69,7 +71,7 @@ namespace osu.Game.Graphics.UserInterface
             set
             {
                 textSize = value;
-                DisplayedCountSpriteText.TextSize = value;
+                DisplayedCountSkinnableSpriteText.TextSize = value;
             }
         }
 
@@ -84,12 +86,13 @@ namespace osu.Game.Graphics.UserInterface
         /// </summary>
         protected RollingCounter()
         {
+            DisplayedCountSpriteText = new OsuSpriteText
+            {
+                Font = @"Venera"
+            };
             Children = new Drawable[]
             {
-                DisplayedCountSpriteText = new OsuSpriteText
-                {
-                    Font = @"Venera"
-                },
+                DisplayedCountSkinnableSpriteText = new SkinnableSpriteText("Play/osu/score-text", _ => DisplayedCountSpriteText, restrictSize: false)
             };
 
             TextSize = 40;
@@ -107,7 +110,7 @@ namespace osu.Game.Graphics.UserInterface
         {
             base.LoadComplete();
 
-            DisplayedCountSpriteText.Text = FormatCount(Current);
+            DisplayedCountSkinnableSpriteText.Text = FormatCount(Current);
         }
 
         /// <summary>

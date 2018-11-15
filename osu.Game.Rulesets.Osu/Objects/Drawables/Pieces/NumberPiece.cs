@@ -46,6 +46,8 @@ namespace osu.Game.Rulesets.Osu.Objects.Drawables.Pieces
                     UseFullGlyphHeight = false,
                 }, restrictSize: false)
                 {
+                    Anchor = Anchor.Centre,
+                    Origin = Anchor.Centre,
                     Text = @"1",
                     TextSize = 40
                 }

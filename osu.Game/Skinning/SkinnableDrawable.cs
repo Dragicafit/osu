@@ -3,6 +3,7 @@
 
 using System;
 using osu.Framework.Graphics;
+using osu.Framework.Graphics.Sprites;
 using OpenTK;
 
 namespace osu.Game.Skinning
@@ -67,8 +68,13 @@ namespace osu.Game.Skinning
             {
                 Drawable.Origin = Anchor.Centre;
                 Drawable.Anchor = Anchor.Centre;
+                if (Drawable is SpriteText)
+                {
+                    Drawable.Origin = this.Origin;
+                    Drawable.Anchor = this.Anchor;
+                }
 
-                InternalChild = Drawable;
+                    InternalChild = Drawable;
             }
             else
                 ClearInternal();
