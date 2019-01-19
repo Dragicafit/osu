@@ -3,15 +3,27 @@
 
 using Android.App;
 using Android.Content.PM;
+using Android.Content;
 using osu.Framework.Android;
 using osu.Game;
 
 namespace osu.Android
 {
-    [Activity(Theme = "@android:style/Theme.NoTitleBar", MainLauncher = true, ScreenOrientation = ScreenOrientation.SensorLandscape, SupportsPictureInPicture = false, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
+    [IntentFilter(new[] { Intent.ActionView },
+                      Categories = new[] { Intent.CategoryDefault, Intent.CategoryBrowsable },
+                      DataScheme = "file",
+                      DataMimeType = @"*/*",
+                      DataPathPatterns = new string[] { @".*\\.osz", @".*\\..*\\.osz", @".*\\..*\\..*\\.osz", @".*\\..*\\..*\\..*\\.osz", @".*\\..*\\..*\\..*\\..*\\.osz", @".*\\..*\\..*\\..*\\..*\\..*\\.osz", },
+                      DataHost = "*")]
+    [Activity(Theme = "@android:style/Theme.NoTitleBar", MainLauncher = true, SupportsPictureInPicture = false, ConfigurationChanges = ConfigChanges.Orientation | ConfigChanges.ScreenSize)]
     public class OsuGameActivity : AndroidGameActivity
     {
         protected override Framework.Game CreateGame()
-            => new OsuGame();
+        {
+            var data = Intent?.Data;
+            if (data != null)
+                return new OsuGame(new string[] { data.Path });
+            return new OsuGame();
+        }
     }
 }

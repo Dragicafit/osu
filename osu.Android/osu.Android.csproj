@@ -33,16 +33,7 @@
     <None Include="..\osu.licenseheader">
       <Link>osu.licenseheader</Link>
     </None>
-    <AndroidNativeLibrary Include="lib\arm64-v8a\libbass.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AndroidNativeLibrary>
-    <AndroidNativeLibrary Include="lib\arm64-v8a\libbass_fx.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AndroidNativeLibrary>
-    <AndroidNativeLibrary Include="lib\armeabi-v7a\libbass.so">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </AndroidNativeLibrary>
-    <AndroidNativeLibrary Include="lib\armeabi-v7a\libbass_fx.so">
+    <AndroidNativeLibrary Include="lib\**\*.so">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </AndroidNativeLibrary>
     <None Include="Properties\AndroidManifest.xml" />
