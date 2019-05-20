@@ -22,6 +22,7 @@ using osu.Game.Online.Leaderboards;
 using osu.Game.Rulesets.Scoring;
 using osu.Game.Scoring;
 using osu.Game.Screens.Play;
+using osu.Game.Skinning;
 using osu.Game.Users;
 using osuTK;
 using osuTK.Graphics;
@@ -214,11 +215,13 @@ namespace osu.Game.Screens.Ranking.Pages
             {
                 Children = new Drawable[]
                 {
-                    new OsuSpriteText
+                    new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                    {
+                        Font = OsuFont.GetFont(),
+                        Colour = colours.Gray7,
+                    }, restrictSize: false, size: 30)
                     {
                         Text = statistic.Value.ToString().PadLeft(4, '0'),
-                        Colour = colours.Gray7,
-                        Font = OsuFont.GetFont(size: 30),
                         Anchor = Anchor.TopCentre,
                         Origin = Anchor.TopCentre,
                     },

@@ -20,6 +20,7 @@ using osu.Game.Graphics.UserInterface;
 using osu.Framework.Graphics.Shapes;
 using osu.Game.Graphics.Sprites;
 using osu.Game.Scoring;
+using osu.Game.Skinning;
 
 namespace osu.Game.Screens.Ranking
 {
@@ -189,15 +190,17 @@ namespace osu.Game.Screens.Ranking
                                     Height = 50,
                                     Margin = new MarginPadding { Bottom = 110 },
                                 },
-                                new OsuSpriteText
+                                new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                                {
+                                    Font = OsuFont.GetFont(weight: FontWeight.Bold),
+                                    Colour = colours.BlueDarker,
+                                }, restrictSize: false, size: 40)
                                 {
                                     Anchor = Anchor.CentreLeft,
                                     Origin = Anchor.BottomCentre,
                                     Text = $"{Score.MaxCombo}x",
                                     RelativePositionAxes = Axes.X,
-                                    Font = OsuFont.GetFont(weight: FontWeight.Bold, size: 40),
                                     X = 0.1f,
-                                    Colour = colours.BlueDarker,
                                 },
                                 new OsuSpriteText
                                 {
@@ -209,15 +212,17 @@ namespace osu.Game.Screens.Ranking
                                     X = 0.1f,
                                     Colour = colours.Gray6,
                                 },
-                                new OsuSpriteText
+                                new SkinnableSpriteText("Play/osu/score-text", _ => new OsuSpriteText
+                                {
+                                    Font = OsuFont.GetFont(weight: FontWeight.Bold),
+                                    Colour = colours.BlueDarker,
+                                }, restrictSize: false, size: 40)
                                 {
                                     Anchor = Anchor.CentreLeft,
                                     Origin = Anchor.BottomCentre,
                                     Text = $"{Score.Accuracy:P2}",
-                                    Font = OsuFont.GetFont(weight: FontWeight.Bold, size: 40),
                                     RelativePositionAxes = Axes.X,
                                     X = 0.9f,
-                                    Colour = colours.BlueDarker,
                                 },
                                 new OsuSpriteText
                                 {
