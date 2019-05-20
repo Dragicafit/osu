@@ -9,6 +9,7 @@ using System;
 using System.Collections.Generic;
 using osu.Framework.Bindables;
 using osuTK.Graphics;
+using osu.Game.Skinning;
 
 namespace osu.Game.Graphics.UserInterface
 {
@@ -21,6 +22,7 @@ namespace osu.Game.Graphics.UserInterface
         public Bindable<T> Current = new Bindable<T>();
 
         protected SpriteText DisplayedCountSpriteText;
+        protected SkinnableSpriteText DisplayedCountSkinnableSpriteText;
 
         /// <summary>
         /// If true, the roll-up duration will be proportional to change in value.
@@ -53,7 +55,7 @@ namespace osu.Game.Graphics.UserInterface
                     return;
 
                 displayedCount = value;
-                DisplayedCountSpriteText.Text = FormatCount(value);
+                DisplayedCountSkinnableSpriteText.Text = FormatCount(value);
             }
         }
 
@@ -61,8 +63,8 @@ namespace osu.Game.Graphics.UserInterface
 
         public float TextSize
         {
-            get => DisplayedCountSpriteText.Font.Size;
-            set => DisplayedCountSpriteText.Font = DisplayedCountSpriteText.Font.With(size: value);
+            get => DisplayedCountSkinnableSpriteText.TextSize;
+            set => DisplayedCountSkinnableSpriteText.TextSize = value;
         }
 
         public Color4 AccentColour
@@ -78,7 +80,8 @@ namespace osu.Game.Graphics.UserInterface
         {
             Children = new Drawable[]
             {
-                DisplayedCountSpriteText = new OsuSpriteText { Font = OsuFont.Numeric }
+                DisplayedCountSkinnableSpriteText = new SkinnableSpriteText("Play/osu/score-text", _ =>
+                DisplayedCountSpriteText = new OsuSpriteText { Font = OsuFont.Numeric }, restrictSize: false)
             };
 
             TextSize = 40;
@@ -96,7 +99,7 @@ namespace osu.Game.Graphics.UserInterface
         {
             base.LoadComplete();
 
-            DisplayedCountSpriteText.Text = FormatCount(Current.Value);
+            DisplayedCountSkinnableSpriteText.Text = FormatCount(Current.Value);
         }
 
         /// <summary>
