@@ -6,6 +6,7 @@ using osu.Framework.Graphics;
 using osu.Framework.Graphics.Containers;
 using osu.Framework.Graphics.Sprites;
 using osu.Game.Graphics.Sprites;
+using osu.Game.Skinning;
 
 namespace osu.Game.Screens.Play.HUD
 {
@@ -18,7 +19,7 @@ namespace osu.Game.Screens.Play.HUD
 
         public bool IsRolling { get; protected set; }
 
-        protected SpriteText PopOutCount;
+        protected SkinnableSpriteText PopOutCount;
 
         protected virtual double PopOutDuration => 150;
         protected virtual float PopOutScale => 2.0f;
@@ -37,7 +38,7 @@ namespace osu.Game.Screens.Play.HUD
         /// </summary>
         protected Easing RollingEasing => Easing.None;
 
-        protected SpriteText DisplayedCountSpriteText;
+        protected SkinnableSpriteText DisplayedCountSkinnableSpriteText;
 
         private int previousValue;
 
@@ -50,13 +51,15 @@ namespace osu.Game.Screens.Play.HUD
 
             Children = new Drawable[]
             {
-                DisplayedCountSpriteText = new OsuSpriteText
+                DisplayedCountSkinnableSpriteText = new SkinnableSpriteText("Play/osu/combo-text", _ => new OsuSpriteText
                 {
                     Alpha = 0,
-                },
-                PopOutCount = new OsuSpriteText
+                }, restrictSize: false),
+                PopOutCount = new SkinnableSpriteText("Play/osu/combo-text", _ => new OsuSpriteText
                 {
                     Alpha = 0,
+                }, restrictSize: false)
+                {
                     Margin = new MarginPadding(0.05f),
                 }
             };
@@ -70,9 +73,9 @@ namespace osu.Game.Screens.Play.HUD
         {
             base.LoadComplete();
 
-            DisplayedCountSpriteText.Text = FormatCount(Current.Value);
-            DisplayedCountSpriteText.Anchor = Anchor;
-            DisplayedCountSpriteText.Origin = Origin;
+            DisplayedCountSkinnableSpriteText.Text = FormatCount(Current.Value);
+            DisplayedCountSkinnableSpriteText.Anchor = Anchor;
+            DisplayedCountSkinnableSpriteText.Origin = Origin;
 
             StopRolling();
         }
@@ -103,8 +106,8 @@ namespace osu.Game.Screens.Play.HUD
             {
                 textSize = value;
 
-                DisplayedCountSpriteText.Font = DisplayedCountSpriteText.Font.With(size: TextSize);
-                PopOutCount.Font = PopOutCount.Font.With(size: TextSize);
+                DisplayedCountSkinnableSpriteText.TextSize = TextSize;
+                PopOutCount.TextSize = TextSize;
             }
         }
 

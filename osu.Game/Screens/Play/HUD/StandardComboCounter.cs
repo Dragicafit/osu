@@ -41,7 +41,7 @@ namespace osu.Game.Screens.Play.HUD
 
             PopOutCount.ScaleTo(1, PopOutDuration, PopOutEasing);
             PopOutCount.FadeOut(PopOutDuration, PopOutEasing);
-            PopOutCount.MoveTo(DisplayedCountSpriteText.Position, PopOutDuration, PopOutEasing);
+            PopOutCount.MoveTo(DisplayedCountSkinnableSpriteText.Position, PopOutDuration, PopOutEasing);
         }
 
         protected virtual void TransformPopOutRolling(int newValue)
@@ -52,15 +52,15 @@ namespace osu.Game.Screens.Play.HUD
 
         protected virtual void TransformNoPopOut(int newValue)
         {
-            DisplayedCountSpriteText.Text = FormatCount(newValue);
-            DisplayedCountSpriteText.ScaleTo(1);
+            DisplayedCountSkinnableSpriteText.Text = FormatCount(newValue);
+            DisplayedCountSkinnableSpriteText.ScaleTo(1);
         }
 
         protected virtual void TransformPopOutSmall(int newValue)
         {
-            DisplayedCountSpriteText.Text = FormatCount(newValue);
-            DisplayedCountSpriteText.ScaleTo(PopOutSmallScale);
-            DisplayedCountSpriteText.ScaleTo(1, PopOutDuration, PopOutEasing);
+            DisplayedCountSkinnableSpriteText.Text = FormatCount(newValue);
+            DisplayedCountSkinnableSpriteText.ScaleTo(PopOutSmallScale);
+            DisplayedCountSkinnableSpriteText.ScaleTo(1, PopOutDuration, PopOutEasing);
         }
 
         protected virtual void ScheduledPopOutSmall(uint id)
@@ -78,7 +78,7 @@ namespace osu.Game.Screens.Play.HUD
 
             // Hides displayed count if was increasing from 0 to 1 but didn't finish
             if (currentValue == 0 && newValue == 0)
-                DisplayedCountSpriteText.FadeOut(FadeOutDuration);
+                DisplayedCountSkinnableSpriteText.FadeOut(FadeOutDuration);
 
             base.OnCountRolling(currentValue, newValue);
         }
@@ -90,7 +90,7 @@ namespace osu.Game.Screens.Play.HUD
             if (DisplayedCount < currentValue)
                 DisplayedCount++;
 
-            DisplayedCountSpriteText.Show();
+            DisplayedCountSkinnableSpriteText.Show();
 
             TransformPopOut(newValue);
 
@@ -106,7 +106,7 @@ namespace osu.Game.Screens.Play.HUD
             ScheduledPopOutCurrentId++;
 
             if (newValue == 0)
-                DisplayedCountSpriteText.FadeOut();
+                DisplayedCountSkinnableSpriteText.FadeOut();
 
             base.OnCountChange(currentValue, newValue);
         }
@@ -114,9 +114,9 @@ namespace osu.Game.Screens.Play.HUD
         protected override void OnDisplayedCountRolling(int currentValue, int newValue)
         {
             if (newValue == 0)
-                DisplayedCountSpriteText.FadeOut(FadeOutDuration);
+                DisplayedCountSkinnableSpriteText.FadeOut(FadeOutDuration);
             else
-                DisplayedCountSpriteText.Show();
+                DisplayedCountSkinnableSpriteText.Show();
 
             if (CanPopOutWhileRolling)
                 TransformPopOutRolling(newValue);
@@ -126,14 +126,14 @@ namespace osu.Game.Screens.Play.HUD
 
         protected override void OnDisplayedCountChange(int newValue)
         {
-            DisplayedCountSpriteText.FadeTo(newValue == 0 ? 0 : 1);
+            DisplayedCountSkinnableSpriteText.FadeTo(newValue == 0 ? 0 : 1);
 
             TransformNoPopOut(newValue);
         }
 
         protected override void OnDisplayedCountIncrement(int newValue)
         {
-            DisplayedCountSpriteText.Show();
+            DisplayedCountSkinnableSpriteText.Show();
 
             TransformPopOutSmall(newValue);
         }
