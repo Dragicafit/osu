@@ -52,6 +52,14 @@ namespace osu.Game.Skinning
                         case "HitCircleOverlap":
                             skin.HitCircleOverlap = int.Parse(pair.Value);
                             break;
+
+                        case "ScorePrefix":
+                            skin.ScoreFont = pair.Value;
+                            break;
+
+                        case "ComboPrefix":
+                            skin.ComboFont = pair.Value;
+                            break;
                     }
 
                     break;

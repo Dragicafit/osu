@@ -25,6 +25,10 @@ namespace osu.Game.Skinning
 
         public int HitCircleOverlap { get; set; }
 
+        public string ScoreFont { get; set; } = "score";
+
+        public string ComboFont { get; set; } = "score";
+
         public float? SliderBorderSize { get; set; }
 
         public bool? CursorExpand { get; set; } = true;
